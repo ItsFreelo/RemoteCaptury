@@ -41,7 +41,10 @@ CAPTURY_DLL_EXPORT int Captury_disconnect(RemoteCaptury* rc);
 CAPTURY_DLL_EXPORT int Captury_getConnectionStatus(RemoteCaptury* rc);
 
 
-
+void* getUserArgExample(){
+	void* userArg;
+	return userArg;
+}
 
 
 
