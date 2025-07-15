@@ -38,6 +38,15 @@ int main(int argc, char** argv)
 
 			if (pose->timestamp != lastTimestamp) {
 				Captury_log(rc, CAPTURY_LOG_INFO, "actor %x has new pose at %zd\n", pose->actor, pose->timestamp);
+
+				//AAAA Begin Pape Abschnitt
+					Captury_log(rc, CAPTURY_LOG_INFO, "anzahl Joints: %x\n", pose->numTransforms);
+					for(int j=0; j < pose->numTransforms; j++){
+						Captury_log(rc, CAPTURY_LOG_INFO, "joint Nr.%u, Translation 1:%f \t", j, pose->transforms[j].translation[0]);
+					}
+
+				//AAAA Ende Pape Abschnitt
+				
 				lastTimestamp = pose->timestamp;
 			}
 
