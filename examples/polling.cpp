@@ -33,20 +33,38 @@ int main(int argc, char** argv)
 		// get list of actors - otherwise we won't know whom to poll
 		const CapturyActor* actors;
 		int numActors = Captury_getActors(rc, &actors);
+		using namespace std;
+		clock_t begin = clock();
 
 		for (int i = 0; i < numActors; ++i) {
-			using namespace std;
-			clock_t begin = clock();
 
 			CapturyPose* pose = Captury_getCurrentPose(rc, actors[i].id);
 			if (pose == NULL)
 				continue;
 
 			if (pose->timestamp != lastTimestamp) {
+				
+				for(int currentJoint=0; currentJoint < pose->numTransforms; currentJoint++){
+					Captury_log(rc, CAPTURY_LOG_INFO,"%u;/%s/maya", (int)timeSinceStart, actors[i].name);
+					Captury_log(rc, CAPTURY_LOG_INFO,"/%s/matrix", actors[i].joints[currentJoint]);
 
+					for(float currentTranslation : pose->transforms[currentJoint].translation){
+						Captury_log(rc, CAPTURY_LOG_INFO, ";%f|f", currentTranslation);
+					}
+
+					for(float currentRotation : pose->transforms[currentJoint].rotation){
+						Captury_log(rc, CAPTURY_LOG_INFO, ";%f|f", currentRotation);
+					}
+
+					Captury_log(rc, CAPTURY_LOG_INFO,"\n");
+				}
+				
+
+				//Old Logging information, wich was replaced with OSC compliant data. 
+				/*
 				Captury_log(rc, CAPTURY_LOG_INFO, "actor %x has new pose at %zd\n", pose->actor, pose->timestamp);
-				Captury_log(rc, CAPTURY_LOG_INFO, "TimeSiceStart: %u\n", (int)timeSinceStart);
-
+				Captury_log(rc, CAPTURY_LOG_INFO, "TimeSinceStart: %u\n", (int)timeSinceStart);
+				
 				//This Code prints out each joint and its current position/ rotation
 				Captury_log(rc, CAPTURY_LOG_INFO, "Number of Joints: %x\n", pose->numTransforms);
 				for(int currentJoint=0; currentJoint < pose->numTransforms; currentJoint++){
@@ -64,7 +82,8 @@ int main(int argc, char** argv)
 					Captury_log(rc, CAPTURY_LOG_INFO, "\n");
 				}
 				Captury_log(rc, CAPTURY_LOG_INFO, "End of Timestamp \n\n\n");
-					
+				*/
+
 				clock_t end = clock();
 				timeSinceStart = timeSinceStart + double(end - begin) / CLOCKS_PER_SEC * 1000;
 
