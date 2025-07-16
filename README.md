@@ -15,16 +15,16 @@ If the Android NDK can be found `RemoteCapturyAndroid` can also be built. This l
 Here are the quickstart commands:
 
 ```
-git clone https://github.com/thecaptury/RemoteCaptury.git
+https://github.com/ItsFreelo/RemoteCaptury.git
 mkdir RemoteCaptury/build && cd RemoteCaptury/build
 cmake ..
-cmake --build . -- RemoteCaptury
+cmake --build . --target RemoteCaptury
 ```
 
 You can build all examples like this:
 
 ```
-cmake --build . -- Examples
+cmake --build . --target Examples
 ```
 
 ## Using
