@@ -39,13 +39,25 @@ int main(int argc, char** argv)
 			if (pose->timestamp != lastTimestamp) {
 				Captury_log(rc, CAPTURY_LOG_INFO, "actor %x has new pose at %zd\n", pose->actor, pose->timestamp);
 
-				//AAAA Begin Pape Abschnitt
+				//This Code prints out each joint and its current position/ rotation
 					Captury_log(rc, CAPTURY_LOG_INFO, "anzahl Joints: %x\n", pose->numTransforms);
-					for(int j=0; j < pose->numTransforms; j++){
-						Captury_log(rc, CAPTURY_LOG_INFO, "joint Nr.%u, Translation 1:%f \t", j, pose->transforms[j].translation[0]);
-					}
+					for(int currentJoint=0; currentJoint < pose->numTransforms; currentJoint++){
+						Captury_log(rc, CAPTURY_LOG_INFO, "joint Nr.%u, NAME:%s ", currentJoint, actors[i].joints[currentJoint]);
 
-				//AAAA Ende Pape Abschnitt
+
+						for(float currentTranslation : pose->transforms[currentJoint].translation){
+							Captury_log(rc, CAPTURY_LOG_INFO, "\t translation: %f", currentTranslation);
+						}
+
+						for(float currentRotation : pose->transforms[currentJoint].rotation){
+							Captury_log(rc, CAPTURY_LOG_INFO, "\t rotation: %f", currentRotation);
+						}
+
+						Captury_log(rc, CAPTURY_LOG_INFO, "\n");
+					}
+					Captury_log(rc, CAPTURY_LOG_INFO, "End dieses Timestamps \n\n\n");
+					
+
 				
 				lastTimestamp = pose->timestamp;
 			}
