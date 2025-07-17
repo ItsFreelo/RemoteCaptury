@@ -42,9 +42,6 @@ CAPTURY_DLL_EXPORT int Captury_getConnectionStatus(RemoteCaptury* rc);
 
 
 
-
-
-
 // returns the number of actors
 // on exit *actors points to an array of CapturyActor*
 // the array is valid until the next call of Captury_getActors() or Captury_freeActors()
