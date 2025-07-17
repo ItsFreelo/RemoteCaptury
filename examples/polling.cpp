@@ -46,7 +46,7 @@ int main(int argc, char** argv)
 				
 				for(int currentJoint=0; currentJoint < pose->numTransforms; currentJoint++){
 					Captury_log(rc, CAPTURY_LOG_INFO,"%u;/%s/maya", (int)timeSinceStart, actors[i].name);
-					Captury_log(rc, CAPTURY_LOG_INFO,"/%s/matrix", actors[i].joints[currentJoint]);
+					Captury_log(rc, CAPTURY_LOG_INFO,"/%s/", actors[i].joints[currentJoint]);
 
 					for(float currentTranslation : pose->transforms[currentJoint].translation){
 						Captury_log(rc, CAPTURY_LOG_INFO, ";%f|f", currentTranslation);
